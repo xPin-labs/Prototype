@@ -1,0 +1,43 @@
+{
+  "blockchain": {
+    "name": "EventTicketingBlockchain",
+    "version": "1.0",
+    "constants": {
+      "Name": "",
+      "Event": "",
+      "EventTicketUsed": false
+    },
+    "functions": {
+      "setName": {
+        "description": "Sets the name of the event attendee",
+        "parameters": {
+          "name": "string"
+        },
+        "returns": "boolean",
+        "code": "function setName(name) { this.constants.Name = name; return true; }"
+      },
+      "setEvent": {
+        "description": "Sets the event name",
+        "parameters": {
+          "event": "string"
+        },
+        "returns": "boolean",
+        "code": "function setEvent(event) { this.constants.Event = event; return true; }"
+      },
+      "setEventTicketUsed": {
+        "description": "Sets the status of the event ticket usage",
+        "parameters": {
+          "eventTicketUsed": "boolean"
+        },
+        "returns": "boolean",
+        "code": "function setEventTicketUsed(eventTicketUsed) { this.constants.EventTicketUsed = eventTicketUsed; return true; }"
+      },
+      "getInfo": {
+        "description": "Gets the current information of the constants",
+        "parameters": {},
+        "returns": "object",
+        "code": "function getInfo() { return { Name: this.constants.Name, Event: this.constants.Event, EventTicketUsed: this.constants.EventTicketUsed }; }"
+      }
+    }
+  }
+}
