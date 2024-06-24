@@ -1,43 +1,43 @@
-{
-  "blockchain": {
-    "name": "EventTicketingBlockchain",
-    "version": "1.0",
-    "constants": {
-      "Name": "",
-      "Event": "",
-      "EventTicketUsed": false
-    },
-    "functions": {
-      "setName": {
-        "description": "Sets the name of the event attendee",
-        "parameters": {
-          "name": "string"
-        },
-        "returns": "boolean",
-        "code": "function setName(name) { this.constants.Name = name; return true; }"
-      },
-      "setEvent": {
-        "description": "Sets the event name",
-        "parameters": {
-          "event": "string"
-        },
-        "returns": "boolean",
-        "code": "function setEvent(event) { this.constants.Event = event; return true; }"
-      },
-      "setEventTicketUsed": {
-        "description": "Sets the status of the event ticket usage",
-        "parameters": {
-          "eventTicketUsed": "boolean"
-        },
-        "returns": "boolean",
-        "code": "function setEventTicketUsed(eventTicketUsed) { this.constants.EventTicketUsed = eventTicketUsed; return true; }"
-      },
-      "getInfo": {
-        "description": "Gets the current information of the constants",
-        "parameters": {},
-        "returns": "object",
-        "code": "function getInfo() { return { Name: this.constants.Name, Event: this.constants.Event, EventTicketUsed: this.constants.EventTicketUsed }; }"
-      }
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract EventTicketingBlockchain {
+    // Constants
+    string public Name;
+    string public Event;
+    bool public EventTicketUsed;
+
+    // Constructor to initialize the contract
+    constructor() {
+        Name = "";
+        Event = "";
+        EventTicketUsed = false;
     }
-  }
+
+    // Sets the name of the event attendee
+    function setName(string memory _name) public returns (bool) {
+        Name = _name;
+        return true;
+    }
+
+    // Sets the event name, with a check for the EventTicketUsed flag
+    function setEvent(string memory _event) public returns (string memory) {
+        if (EventTicketUsed) {
+            return "Error: Ticket has already been used.";
+        } else {
+            Event = _event;
+            return "Event set successfully.";
+        }
+    }
+
+    // Sets the status of the event ticket usage
+    function setEventTicketUsed(bool _eventTicketUsed) public returns (bool) {
+        EventTicketUsed = _eventTicketUsed;
+        return true;
+    }
+
+    // Gets the current information of the constants
+    function getInfo() public view returns (string memory, string memory, bool) {
+        return (Name, Event, EventTicketUsed);
+    }
 }
