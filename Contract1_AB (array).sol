@@ -13,6 +13,9 @@ contract EventTicketingBlockchain {
     // Array to store all tickets
     Ticket[] public tickets;
 
+    // Event to be emitted when a new ticket is added
+    event TicketAdded(uint indexed ticketIndex, string name, string eventName, string hyperlink);
+
     // Function to add a new ticket
     function addTicket(string memory _name, string memory _eventName, string memory _hyperlink) public returns (uint) {
         Ticket memory newTicket = Ticket({
@@ -22,7 +25,9 @@ contract EventTicketingBlockchain {
             hyperlink: _hyperlink
         });
         tickets.push(newTicket);
-        return tickets.length - 1; // Return the index of the newly added ticket
+        uint ticketIndex = tickets.length - 1;
+        emit TicketAdded(ticketIndex, _name, _eventName, _hyperlink); // Emit the event with the index
+        return ticketIndex;
     }
 
     // Function to set the name of an event attendee for a specific ticket
