@@ -33,7 +33,7 @@ contract EventTicketingBlockchain {
     }
 
     // Function to set the event name for a specific ticket, with a check for eventTicketUsed flag
-    function setEvent(uint _ticketIndex, string memory _eventName) public returns (string memory) {
+    function setEventName(uint _ticketIndex, string memory _eventName) public returns (string memory) {
         require(_ticketIndex < tickets.length, "Ticket index out of range.");
         if (tickets[_ticketIndex].eventTicketUsed) {
             return "Error: Ticket has already been used.";
