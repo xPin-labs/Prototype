@@ -14,7 +14,7 @@ contract EventTicketingBlockchain {
     Ticket[] public tickets;
 
     // Function to add a new ticket
-    function addTicket(string memory _name, string memory _eventName, string memory _hyperlink) public returns (bool) {
+    function addTicket(string memory _name, string memory _eventName, string memory _hyperlink) public returns (uint) {
         Ticket memory newTicket = Ticket({
             name: _name,
             eventName: _eventName,
@@ -22,7 +22,7 @@ contract EventTicketingBlockchain {
             hyperlink: _hyperlink
         });
         tickets.push(newTicket);
-        return true;
+        return tickets.length - 1; // Return the index of the newly added ticket
     }
 
     // Function to set the name of an event attendee for a specific ticket
