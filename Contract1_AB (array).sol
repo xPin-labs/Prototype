@@ -5,7 +5,7 @@ contract EventTicketingBlockchain {
     // Struct to hold ticket information
     struct Ticket {
         string name;
-        string event;
+        string eventName;
         bool eventTicketUsed;
         string hyperlink;
     }
@@ -14,10 +14,10 @@ contract EventTicketingBlockchain {
     Ticket[] public tickets;
 
     // Function to add a new ticket
-    function addTicket(string memory _name, string memory _event, string memory _hyperlink) public returns (bool) {
+    function addTicket(string memory _name, string memory _eventName, string memory _hyperlink) public returns (bool) {
         Ticket memory newTicket = Ticket({
             name: _name,
-            event: _event,
+            eventName: _eventName,
             eventTicketUsed: false,
             hyperlink: _hyperlink
         });
@@ -33,12 +33,12 @@ contract EventTicketingBlockchain {
     }
 
     // Function to set the event name for a specific ticket, with a check for eventTicketUsed flag
-    function setEvent(uint _ticketIndex, string memory _event) public returns (string memory) {
+    function setEvent(uint _ticketIndex, string memory _eventName) public returns (string memory) {
         require(_ticketIndex < tickets.length, "Ticket index out of range.");
         if (tickets[_ticketIndex].eventTicketUsed) {
             return "Error: Ticket has already been used.";
         } else {
-            tickets[_ticketIndex].event = _event;
+            tickets[_ticketIndex].eventName = _eventName;
             return "Event set successfully.";
         }
     }
@@ -61,6 +61,6 @@ contract EventTicketingBlockchain {
     function getTicketInfo(uint _ticketIndex) public view returns (string memory, string memory, bool, string memory) {
         require(_ticketIndex < tickets.length, "Ticket index out of range.");
         Ticket memory ticket = tickets[_ticketIndex];
-        return (ticket.name, ticket.event, ticket.eventTicketUsed, ticket.hyperlink);
+        return (ticket.name, ticket.eventName, ticket.eventTicketUsed, ticket.hyperlink);
     }
 }
